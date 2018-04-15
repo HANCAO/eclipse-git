@@ -46,10 +46,14 @@ public class MgmtEmp extends HttpServlet {
 			}
 		}
 		if(path.equals("/addEmp")) {
-			long id=Long.parseLong(request.getParameter("id"));
+			
+			String name=request.getParameter("name");
+			String salaryString=request.getParameter("salary");
+			Double salary=Double.parseDouble(salaryString);
+			int age=Integer.parseInt(request.getParameter("age"));
 			EmployeeDAO dao=new EmployeeDAO();
 			try {
-				dao.add(id);
+				dao.add(name,salary,age);
 				List<Employe> employees=dao.list();
 				
 				request.setAttribute("employees", employees);
@@ -61,9 +65,12 @@ public class MgmtEmp extends HttpServlet {
 		}
 		if(path.equals("/loadEmp")) {
 			long id=Long.parseLong(request.getParameter("id"));
+			String name=request.getParameter("name");
+			Double salary=Double.parseDouble(request.getParameter("salary"));
+			int age=Integer.parseInt(request.getParameter("age"));
 			EmployeeDAO dao=new EmployeeDAO();
 			try {
-				dao.load(id);
+				dao.load(id,name,salary,age);
 				List<Employe> employees=dao.list();
 				
 				request.setAttribute("employees", employees);

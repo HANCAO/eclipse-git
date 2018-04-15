@@ -37,18 +37,23 @@ public class EmployeeDAO {
 		DBUtil.close(conn);
 	}
 
-	public void add(long id) throws Exception{
+	public void add(String name,double salary,int age) throws Exception{
 		Connection conn=DBUtil.getConnection();
 		PreparedStatement prep=conn.prepareStatement("insert into t_emp2(name,salary,age) values(?,?,?)");
-		prep.setLong(1, id);
+		prep.setString(1,name);
+		prep.setDouble(2, salary);
+		prep.setInt(3, age);
 		prep.executeUpdate();
 		DBUtil.close(conn);
 	}
 	
-	public void load(long id) throws Exception{
+	public void load(long id,String name,double salary,int age) throws Exception{
 		Connection conn=DBUtil.getConnection();
 		PreparedStatement prep=conn.prepareStatement("update t_emp2 set name=?,salary=?,age=? where id=?");
 		prep.setLong(1, id);
+		prep.setString(2, name);
+		prep.setDouble(3, salary);
+		prep.setInt(4, age);
 		prep.executeUpdate();
 		DBUtil.close(conn);
 	}
